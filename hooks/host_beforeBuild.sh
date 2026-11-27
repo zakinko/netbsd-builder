@@ -15,6 +15,15 @@
 # script -- no reference to any sibling builder (user policy).
 set -e
 
+# NetBSD/macppc builds on the OpenBIOS from QEMU 11.1, staged at VM_BIOS.
+if [ "$VM_ARCH" = "powerpc" ]; then
+  if [ -n "${VM_BIOS:-}" ] && [ ! -e "$VM_BIOS" ]; then
+    bash files/fetch-openbios-ppc.sh "$(dirname "$VM_BIOS")"
+    test -e "$VM_BIOS"
+  fi
+  exit 0
+fi
+
 [ "$VM_ARCH" = "sparc64" ] || exit 0
 
 # VM_QEMU_TAR names the output tarball; its dirname is the outdir. setup()

@@ -1,0 +1,34 @@
+#
+# wait screen text                         | keys
+#
+# NetBSD/macppc sysinst over the serial console. The screens are taken
+# from a complete install of the 11.1 release driven by anita. Unlike
+# sparc64 there is no partition-type edit: the root FFS is never read by a
+# bootblock, as the kernel boots from a separate ISO9660 partition.
+
+Terminal type | enter | 300
+(I)nstall, (S)hell or (H)alt | string i ; enter | 60
+messages in English | enter | 120
+Upgrade NetBSD on a hard disk | enter | 120
+Shall we continue | string b ; enter | 60
+which disk do you want to install | enter | 60
+What would you like to do | string b ; enter | 60
+Partition sizes ok | string x ; enter | 60
+ready to install NetBSD on your hard disk | string b ; enter | 60
+Installation without X11 | string b ; enter | 120
+Your disk is now ready | enter | 60
+sysinst will give you the opportunity | enter | 3600
+Changing local password for root | enter | 60
+cryptographically strong | string x ; enter | 60
+Finished configuring | string a ; enter | 60
+Available interfaces | enter | 60
+To be able to use the network | enter | 60
+Perform autoconf | enter | 60
+Your host name | string netbsd ; enter | 90
+Your DNS domain | enter | 30
+values you entered | enter | 30
+installed in /etc | enter | 30
+Enable sshd | string g ; enter | 30
+Finished configuring | string x ; enter | 30
+you should edit | enter | 60
+Reboot the computer | string d ; enter ; sleep 20 | 30

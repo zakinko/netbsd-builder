@@ -16,6 +16,14 @@
   #     gunzipped), which the 11.0-microvm variant boots by direct kernel
   #     load (profile.json "kernel_asset"). Fetched by
   #     files/fetch-microvm-kernel.sh.
+  #   * netbsd-<release>-alpha-kernel -- NetBSD's official alpha GENERIC
+  #     kernel (binary/kernel/netbsd-GENERIC.gz, SHA512-verified,
+  #     gunzipped). QEMU's clipper has no SRM console, so anyvm boots the
+  #     alpha images by direct kernel load (profile.json "kernel_asset").
+  #     Fetched by files/fetch-alpha-kernel.sh.
+  #   * openbios-ppc -- the OpenBIOS from QEMU v11.1.0, unmodified, which the
+  #     macppc (powerpc) images need on hosts whose QEMU is older (profile.json
+  #     "bios_asset"). Fetched by files/fetch-openbios-ppc.sh.
   # A single job, NOT part of the build matrix: every matrix job uploading
   # the same asset name in parallel would race (GitHub rejects duplicate
   # asset names), and the upload should not depend on any one image build
@@ -34,6 +42,10 @@
       run: bash files/build-qemu-sparc64.sh build
     - name: Fetch the MICROVM kernels
       run: bash files/fetch-microvm-kernel.sh build
+    - name: Fetch the alpha kernels
+      run: bash files/fetch-alpha-kernel.sh build
+    - name: Fetch the macppc OpenBIOS
+      run: bash files/fetch-openbios-ppc.sh build
     - name: Upload Release Assets
       uses: softprops/action-gh-release@v3
       env:
@@ -48,3 +60,5 @@
         files: |
           build/qemu-10.2.3-sparc64-noble.tar.zst
           build/netbsd-*-microvm-kernel
+          build/netbsd-*-alpha-kernel
+          build/openbios-ppc

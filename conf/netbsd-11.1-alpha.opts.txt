@@ -1,0 +1,38 @@
+#
+# wait screen text                         | keys
+#
+# NetBSD/alpha sysinst over the serial console. The same screens as
+# macppc, less the "(I)nstall, (S)hell or (H)alt" prompt, which the alpha
+# install kernel does not show. No partition-type edit: the kernel is
+# loaded directly, so no bootblock reads the root FFS.
+
+Terminal type | enter | 300
+messages in English | enter | 120
+Upgrade NetBSD on a hard disk | enter | 120
+Shall we continue | string b ; enter | 60
+which disk do you want to install | enter | 60
+What would you like to do | string b ; enter | 60
+Partition sizes ok | string x ; enter | 60
+ready to install NetBSD on your hard disk | string b ; enter | 60
+Installation without X11 | string b ; enter | 120
+Your disk is now ready | enter | 60
+sysinst will give you the opportunity | enter | 3600
+# The "Changing local password for root" / "New password:" prompt does not
+# reliably show up in the captured screen text on alpha (it arrived in 3 s
+# in one build and never in the next), so anchor on the explanation printed
+# just before it. Wait before the enter: sent at once, it can land before
+# passwd reads the tty and be lost, leaving passwd waiting.
+has not yet been initialized | sleep 15 ; enter | 300
+cryptographically strong | string x ; enter | 60
+Finished configuring | string a ; enter | 60
+Available interfaces | enter | 60
+To be able to use the network | enter | 60
+Perform autoconf | enter | 60
+Your host name | string netbsd ; enter | 90
+Your DNS domain | enter | 30
+values you entered | enter | 30
+installed in /etc | enter | 30
+Enable sshd | string g ; enter | 30
+Finished configuring | string x ; enter | 30
+you should edit | enter | 60
+Reboot the computer | string d ; enter ; sleep 20 | 30
